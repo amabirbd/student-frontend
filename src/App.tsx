@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import AddStudent from './components/students/AddStudent';
+import Students from './components/students/Students';
 
 function App() {
+
+  const [students, setStudents] = useState([{}])
+    
+    useEffect(() => {
+      getStudents();
+        
+      }, []);
+
+    function getStudents() {
+      fetch("http://localhost:3333/student")
+        .then(res => res.json())
+        .then(data => {
+          setStudents(data.data)
+          console.log(data.data);
+
+        })
+        .catch(err => console.error(err))
+    }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Student Management</h1>
+      <AddStudent />
+      <Students students={students} />
+      
     </div>
   );
 }
