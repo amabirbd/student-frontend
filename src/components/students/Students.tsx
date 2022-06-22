@@ -6,14 +6,15 @@ import React from 'react'
 const Students: React.FC<any> = (props) => {
     
   return (
-    <div className='student_list'>
-        <h3>Student list</h3>
+    <>
+        <ul className='student_list'>
         {
             props.students.map(student => (
-                <li key={student._id}>{student.name}</li>
+                <li className='student_li_item' key={student._id}>{student.name}<span className='email_field'>{student.email}</span></li>
             ))
         }
-    </div>
+        </ul>
+    </>
   )
 }
 

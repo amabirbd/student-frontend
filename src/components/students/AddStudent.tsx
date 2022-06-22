@@ -10,16 +10,17 @@ const AddStudent: React.FC = () => {
         name: string,
         address: string,
         email: string,
+        password: string
     }
 
-    const initialValues: studentFormValues = { name: '', address: '', email: ''}
+    const initialValues: studentFormValues = { name: '', address: '', email: '', password: ''}
 
 
     const formik = useFormik({
         initialValues: initialValues,
         onSubmit: values => {
           alert(JSON.stringify(values, null, 2));
-          fetch("http://localhost:3333/student",{
+          fetch("http://localhost:3333/students",{
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
             'Content-Type': 'application/json'
@@ -37,7 +38,9 @@ const AddStudent: React.FC = () => {
       });
 
       return (
-        <form onSubmit={formik.handleSubmit} className="add_student_form">
+        <div className='add_students'>
+          <h3>Add Students</h3>
+          <form onSubmit={formik.handleSubmit} className="add_student_form">
           <label htmlFor="name">name</label>
           <input
             id="name"
@@ -62,9 +65,18 @@ const AddStudent: React.FC = () => {
             onChange={formik.handleChange}
             value={formik.values.email}
           />
+          <label htmlFor="password">password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
     
           <button type="submit" className='submit_btn'>Submit</button>
         </form>
+        </div>
       );
 }
 

@@ -13,7 +13,7 @@ function App() {
       }, []);
 
     function getStudents() {
-      fetch("http://localhost:3333/student")
+      fetch("http://localhost:3333/students")
         .then(res => res.json())
         .then(data => {
           setStudents(data.data)
@@ -28,6 +28,7 @@ function App() {
     <div className="App">
       <h1>Student Management</h1>
       <AddStudent />
+      <h3>Students</h3>
       <Students students={students} />
       
     </div>
